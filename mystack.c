@@ -57,6 +57,35 @@ int my_stack_top(my_stack* stack)
     return stack->ptr[stack->count];
 }
 
+int my_stack_get_deep(my_stack* stack, int index, int* result)
+{
+    if (stack->count == 0) {
+        return -1;
+    }
+    if (index >= stack->count) {
+        return -1;
+    }
+    
+    *result = stack->ptr[stack->count - index - 1];
+    return 1;
+}
+
+int my_stack_set_deep(my_stack* stack, int index, int value)
+{
+    if (stack->count == 0) {
+        return -1;
+    }
+    if (index >= stack->count) {
+        return -1;
+    }
+    
+    stack->ptr[stack->count - index - 1] = value;
+}
+
+int my_stack_clean(my_stack* stack) {
+    stack->count = 0;
+}
+
 int my_stack_is_empty(my_stack* stack)
 {
     return stack->count == 0;
@@ -65,4 +94,9 @@ int my_stack_is_empty(my_stack* stack)
 int my_stack_is_full(my_stack* stack)
 {
     return stack->count >= stack->size;
+}
+
+int my_stack_get_count(my_stack* stack)
+{
+    return stack->count;
 }
