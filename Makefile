@@ -1,7 +1,7 @@
 # Makefile using Lex to build
 
 CC     = gcc
-CFLAGS = -c
+CFLAGS = -c -g -std=c99
 
 LEX    = lex
 LFLAGS =
@@ -16,6 +16,7 @@ all:	calc
 
 test: all
 	./calc < test1.txt
+	./calc < test2.txt
 
 calc:	$(OBJ)
 	$(LN) $(LNFLAGS) -o calc $(OBJ)
@@ -25,6 +26,6 @@ calc.o:	calc.c
 
 calc.c: calc.l
 	$(LEX) $(LFLAGS) -o calc.c calc.l
-
-clean:
+	
+clean: 
 	rm -f calc calc.c *.o
